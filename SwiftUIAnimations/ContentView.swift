@@ -12,6 +12,12 @@ struct ContentView: View {
 
     var body: some View {
         Button("Tap Me") {
+            guard animationAmount < 6 else {
+                animationAmount = 1
+
+                return
+            }
+
             animationAmount += 1
         }
         .padding(50)
@@ -20,7 +26,7 @@ struct ContentView: View {
         .clipShape(.circle)
         .scaleEffect(animationAmount)
         .blur(radius: (animationAmount - 1) * 3)
-        .animation(.default, value: animationAmount)
+        .animation(.spring(duration: 1, bounce: 0.5), value: animationAmount)
     }
 }
 
